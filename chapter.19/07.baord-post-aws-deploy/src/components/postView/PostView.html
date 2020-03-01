@@ -1,0 +1,76 @@
+<div class="card gedf-card" v-if="!$apollo.queries.postView.loading">
+  <div class="card-header">
+    <div class="d-flex justify-content-between align-items-center">
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="mr-2">
+          <img
+            class="rounded-circle"
+            width="45"
+            src="https://picsum.photos/50/50"
+            alt=""
+          />
+        </div>
+        <div class="ml-2">
+          <div class="h5 m-0">{{ postView.user.nickname }}</div>
+          <div class="h7 text-muted">{{ postView.user.email }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="text-muted h7 mb-2">
+      <i class="fa fa-clock-o"></i>{{ $moment(postView.createdAt).fromNow() }}
+    </div>
+    <a class="card-link" href="#">
+      <h5 class="card-title">
+        {{ postView.title }}
+      </h5>
+    </a>
+    <p class="card-text" v-html="postView.context"></p>
+  </div>
+  <div class="card-footer">
+    <a href="#" @click="postDelete" class="card-link" v-if="isMe(postView.user)"
+      ><i class="fa fa-gittip"></i> 삭제</a
+    >
+    <a href="#" class="card-link"
+      ><i class="fa fa-comment"></i> 댓글 : {{ commentList.length }}</a
+    >
+  </div>
+  <div class="card my-4" v-if="$store.getters['User/isLogin']">
+    <h5 class="card-header">댓글 달기</h5>
+    <div class="card-body">
+      <form @submit="commentWrite">
+        <div class="form-group">
+          <textarea
+            class="form-control"
+            rows="2"
+            v-model="comment"
+            placeholder="댓글을 입력하세요."
+          ></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">등록</button>
+      </form>
+    </div>
+  </div>
+  <div class="media mb-4" v-for="comment, index in commentList">
+    <img
+      class="d-flex mr-3 rounded-circle"
+      src="https://picsum.photos/50/50"
+      alt=""
+    />
+    <div class="media-body">
+      <h5 class="mt-0">
+        {{ comment.user.nickname }}
+
+        <a
+          href="#"
+          class="card-link"
+          v-if="isMe(comment.user)"
+          @click="commentDelete(comment.id)"
+          ><i class="fa fa-gittip"></i> 삭제</a
+        >
+      </h5>
+      <span v-html="br(comment.context)"></span>
+    </div>
+  </div>
+</div>

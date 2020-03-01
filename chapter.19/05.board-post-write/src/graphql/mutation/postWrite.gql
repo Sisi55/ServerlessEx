@@ -1,0 +1,15 @@
+mutation PostWrite($data: PostInput!) {
+  postWrite(data: $data) {
+    id
+    title
+    context
+    category {
+      id
+      name
+    }
+    user {
+      email
+      nickname
+    }
+  }
+}

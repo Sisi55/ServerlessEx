@@ -1,0 +1,22 @@
+version: '3'
+services:
+  mysql:
+    image: mysql:5.7.27
+#    restart: always
+    environment:
+      - MYSQL_USER=board
+      - MYSQL_PASSWORD=password
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=board
+      - TZ=Asia/Seoul
+    ports:
+      - '3306:3306'
+    command: ['mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci']
+    
+  redis:
+    image: redis
+#    restart: always
+    environment:
+      - TZ=Asia/Seoul
+    ports:
+      - '6379:6379'

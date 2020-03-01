@@ -1,0 +1,6 @@
+<div id="app">
+  {{ name }}
+  <CallEmit :name="name" @CallEmit="callMe"></CallEmit>
+  <CallMethod :name="name" :CallMethod="callMe"></CallMethod>
+  <CallParent :name="name"></CallParent>
+</div>

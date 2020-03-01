@@ -1,0 +1,80 @@
+<div>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col">
+        <h1>
+          {{ categoryName }}
+          {{ search }}
+        </h1>
+      </div>
+      <div class="col">
+        <div class="input-group float-right" id="board-search">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="검색"
+            v-model="searchInput"
+            @keyup.enter="searchUrl()"
+          />
+          <div class="input-group-append">
+            <button
+              class="btn btn-primary"
+              type="button"
+              id="button-addon2"
+              @click="searchUrl()"
+            >
+              검색
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <table class="table table-hover">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">이름</th>
+        <th scope="col">제목</th>
+        <th scope="col">조회수</th>
+        <th scope="col">글쓴일</th>
+      </tr>
+    </thead>
+    <tbody v-if="!$apollo.loading">
+      <tr
+        v-for="post in postList.posts"
+        :key="post.id"
+        @click="$router.push('/board/view/'+ post.id)"
+        style="cursor: pointer;"
+      >
+        <th scope="row">{{ post.id }}</th>
+        <td>{{ post.user.nickname }}</td>
+        <td>{{ post.title }}</td>
+        <td>{{ post.views }}</td>
+        <td>{{ $moment(post.createdAt).fromNow() }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <v-pagination
+          class="pagination"
+          v-model="currentPage"
+          :page-count="total"
+          :classes="bootstrapPaginationClasses"
+        ></v-pagination>
+      </div>
+      <div class="col text-right" v-if="$store.getters['User/isLogin']">
+        <button
+          class="btn btn-primary"
+          @click="$router.push('/board/write/'+categoryId)"
+        >
+          글쓰기
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

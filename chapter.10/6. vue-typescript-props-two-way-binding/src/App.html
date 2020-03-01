@@ -1,0 +1,9 @@
+<div id="app">
+  <PropsSync
+    :name="name"
+    :message.sync="message"
+    :callCount.sync="callCount"
+    :callFunction="callMe"
+    @callEmit="callMe"
+  ></PropsSync>
+</div>

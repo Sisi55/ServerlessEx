@@ -1,0 +1,27 @@
+query PostView($id: Int!){
+  postView(id: $id) {
+    id
+    user {
+      id
+      nickname
+      email
+    }
+    category {
+      id
+      name
+    }
+    title
+    context
+    createdAt
+  }
+  commentList(postId: $id) {
+    id
+    user {
+      id
+      nickname
+      email
+    }
+    context
+    createdAt
+  }
+}

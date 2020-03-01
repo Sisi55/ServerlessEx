@@ -1,0 +1,17 @@
+<div>
+  <input
+    type="text"
+    v-model="task"
+    placeholder="할일을 입력 해 주세요"
+    @keyup.enter="addItem()"
+  />
+  <ul>
+    <TodoListItem
+      v-for="(item, index) in todoItemList"
+      :item="item"
+      :index="index"
+      @remove="removeItem"
+      @update="updateItem"
+    ></TodoListItem>
+  </ul>
+</div>

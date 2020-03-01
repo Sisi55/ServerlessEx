@@ -1,0 +1,27 @@
+<div class="write-form">
+  <form v-on:submit="write" method="post">
+    <h4 class="modal-title">글쓰기</h4>
+    <div class="form-group">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="제목"
+        required="required"
+        v-model="form.title"
+      />
+    </div>
+    <div class="form-group">
+      <quill-editor
+        ref="myTextEditor"
+        v-model="form.context"
+        :options="editorOption"
+      >
+      </quill-editor>
+    </div>
+    <input
+      type="submit"
+      class="btn btn-primary btn-block btn-lg"
+      value="등록하기"
+    />
+  </form>
+</div>

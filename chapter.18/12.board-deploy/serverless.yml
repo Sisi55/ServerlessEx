@@ -1,0 +1,75 @@
+service:
+  name: board
+
+plugins:
+  - serverless-plugin-typescript
+  - serverless-offline
+
+provider:
+  name: aws
+  runtime: nodejs10.x
+  region: ap-northeast-2
+  stage: ${opt:stage,'dev'}
+  timeout: 30
+  vpc:
+    securityGroupIds:
+      - HERE_YOUR_SECURITY_GROUP 
+    subnetIds:
+      - HERE_YOUR_SUBNET_1
+      - HERE_YOUR_SUBNET_2
+      - HERE_YOUR_SUBNET_3
+  environment:
+    NODE_DEV: ${self:provider.stage}
+    MYSQL_HOST: ${self:custom.mysqlHost.${self:provider.stage}}
+    MYSQL_PORT: ${self:custom.mysqlPort.${self:provider.stage}}
+    MYSQL_USER: ${self:custom.mysqlUser.${self:provider.stage}}
+    MYSQL_PASS: ${self:custom.mysqlPass.${self:provider.stage}}
+    MYSQL_DATABASE: ${self:custom.mysqlDatabase.${self:provider.stage}}
+    MYSQL_SYNC: ${self:custom.mysqlSync.${self:provider.stage}}
+    MYSQL_LOG: ${self:custom.mysqlLog.${self:provider.stage}}
+    PLAYGROUND_ENDPOINT: ${self:custom.playgroundEndpoint.${self:provider.stage}}    
+    SLS_DEBUG: true
+
+custom:
+  serverless-offline:
+    port: 3000
+  stages:
+    - dev
+    - product
+  mysqlHost:
+    dev: "localhost"
+    product: "database-1.aaaaaaaaaaaa.ap-northeast-2.rds.amazonaws.com"
+  mysqlPort:
+    dev: 3308
+    product: 3306
+  mysqlUser:
+    dev: "board"
+    product: "admin"
+  mysqlPass:
+    dev: "password"
+    product: "userpassword"
+  mysqlDatabase:
+    dev: "board"
+    product: "board"
+  mysqlSync:
+    dev: true
+    product: true
+  mysqlLog:
+    dev: "all"
+    product: "all"
+  playgroundEndpoint:
+    dev: "/graphql"
+    product: "/product/graphql"
+
+functions:
+  graphql:
+    handler: src/handler.graphql
+    events:
+      - http:
+          path: graphql
+          method: get
+          cors: true
+      - http:
+          path: graphql
+          method: post
+          cors: true

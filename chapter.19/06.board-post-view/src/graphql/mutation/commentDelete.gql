@@ -1,0 +1,3 @@
+mutation CommentDelete($id: Int!){
+  commentDelete(id: $id)
+}

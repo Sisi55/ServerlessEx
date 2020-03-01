@@ -1,0 +1,1 @@
+aws lambda create-function --function-name helloworld --zip-file fileb://function.zip --handler index.handler --runtime nodejs8.10 --role arn:aws:iam::197971921890:role/cli-lambda-role

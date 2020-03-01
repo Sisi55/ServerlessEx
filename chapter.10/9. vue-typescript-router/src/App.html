@@ -1,0 +1,10 @@
+<div id="app">
+  <div id="nav">
+    <router-link to="/">Home</router-link> |
+    <router-link to="/about/my-id">MyID</router-link> |
+    <router-link :to="{name:'about', params: {id: 'new-id'}}"
+      >NewID</router-link
+    >
+  </div>
+  <router-view></router-view>
+</div>

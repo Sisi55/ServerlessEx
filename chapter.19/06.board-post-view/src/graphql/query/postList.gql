@@ -1,0 +1,16 @@
+query PostList($categoryId: Int!, $skip: Int!, $take: Int!, $search: String){
+  postList(categoryId: $categoryId, skip: $skip, take: $take, search: $search) {
+    posts {
+      id
+      title
+      createdAt
+      views
+      user {
+        id
+        nickname
+        email
+      }
+    }
+    count
+  }
+}

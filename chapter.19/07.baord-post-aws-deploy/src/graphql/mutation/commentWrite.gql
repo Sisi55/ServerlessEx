@@ -1,0 +1,3 @@
+mutation CommentWrite($data: CommentInput!) {
+  commentWrite(data: $data)
+}

@@ -1,0 +1,50 @@
+<div class="login-form">
+  <form v-on:submit="register">
+    <div class="avatar"><i class="material-icons">perm_identity</i></div>
+    <h4 class="modal-title">회원가입</h4>
+    <div class="form-group">
+      <input
+        v-model="form.nickname"
+        type="text"
+        class="form-control"
+        placeholder="별명"
+        required="required"
+      />
+    </div>
+    <div class="form-group">
+      <input
+        v-model="form.email"
+        type="text"
+        class="form-control"
+        placeholder="이메일"
+        required="required"
+      />
+    </div>
+    <div class="form-group">
+      <input
+        v-model="form.password"
+        type="password"
+        class="form-control"
+        placeholder="암호"
+        required="required"
+      />
+    </div>
+    <div class="form-group">
+      <input
+        v-model="form.repassword"
+        type="password"
+        class="form-control"
+        placeholder="암호 확인"
+        required="required"
+      />
+    </div>
+    <input
+      type="submit"
+      class="btn btn-primary btn-block btn-lg"
+      value="등록"
+    />
+  </form>
+  <div class="text-center small">
+    계정이 있으신가요? <router-link to="/login">로그인</router-link>
+  </div>
+</div>

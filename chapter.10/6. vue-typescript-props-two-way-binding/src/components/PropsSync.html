@@ -1,0 +1,18 @@
+<div>
+  <h2>{{ name }}</h2>
+  <h2>{{ message }}</h2>
+  <h2>{{ messageAndCount }}</h2>
+  <h2>{{ syncedMessage }}</h2>
+  <h2>호출 횟수 : {{ callCount }}</h2>
+  <h2>호출 횟수 : {{ syncedCallCount }}</h2>
+  <input type="button" @click="callParent()" value="부모 부르기" />
+  <input type="button" @click="callFather()" value="아빠 부르기" />
+  <input type="button" @click="callMather()" value="엄마 부르기" />
+  <input
+    type="button"
+    @click="syncedCallCount = syncedCallCount + 1"
+    value="더하기"
+  />
+  <br />
+  <input type="button" @click="syncedMessage = '많이 좋아요'" value="좋아요" />
+</div>

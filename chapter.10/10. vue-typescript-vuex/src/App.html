@@ -1,0 +1,52 @@
+<div id="app">
+  <div style="width: 100%; display: flex;">
+    <div style="flex-grow: 1;">
+      <h1>Counter1</h1>
+      <p>{{ $store.state.Counter1.count }}</p>
+      <p>{{ $store.getters["Counter1/doubleCount"] }}</p>
+      <p>
+        <input
+          type="button"
+          @click="$store.commit('Counter1/increment', 1)"
+          value="+1 증가(mutations)"
+        />
+      </p>
+      <p>
+        <input
+          type="button"
+          @click="$store.dispatch('Counter1/inc', 2)"
+          value="+2 증가(actions)"
+        />
+      </p>
+      <hr />
+      <h2>Mapper</h2>
+      <p>{{ count }}</p>
+      <p>{{ doubleCount }}</p>
+      <p>
+        <input type="button" @click="increment(1)" value="+1 증가(mutations)" />
+      </p>
+      <p>
+        <input type="button" @click="inc(2)" value="+2 증가(actions)" />
+      </p>
+    </div>
+    <div style="flex-grow: 1;">
+      <h1>Counter2</h1>
+      <p>{{ $store.state.Counter2.count }}</p>
+      <p>{{ $store.getters["Counter2/doubleCount"] }}</p>
+      <p>
+        <input
+          type="button"
+          @click="$store.commit('Counter2/increment', 1)"
+          value="+1 증가(mutations)"
+        />
+      </p>
+      <p>
+        <input
+          type="button"
+          @click="$store.dispatch('Counter2/inc', 2)"
+          value="+2 증가(mutations)"
+        />
+      </p>
+    </div>
+  </div>
+</div>
